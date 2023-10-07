@@ -10,9 +10,11 @@ class Season(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
 
 class Dancer(models.Model):
+    # This is lowercase and unidecoded (but not shown to users of course)
     name = models.CharField(max_length=100)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(blank=True, null=True)
+    program = models.CharField(max_length=100, blank=True, null=True)
 
     # These two can change from season to season so we can't just use a Boolean field
     choreographer_seasons = models.ManyToManyField(Season, related_name="choreographer_set")
